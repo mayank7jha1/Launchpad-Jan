@@ -15,6 +15,12 @@ int32_t main() {
 		cin >> a[i];
 		s += a[i];
 	}
+	int suffix[n + 1] {0};
+	suffix[n - 1] = a[n - 1];
+	for (int i = n - 2; i >= 0; i--) {
+		suffix[i] = suffix[i + 1] + a[i];
+	}
+
 
 	if (s % 2 == 1) {
 		cout << "NO" << endl;
@@ -32,13 +38,11 @@ int32_t main() {
 		int val = lsum - s;
 		mp[a[i]]++;
 
-		if (mp[val] > 0) {
+		if (mp[val] > 0 or (val + suffix[n - i - 1] == s)) {
 			cout << "YES" << endl;
 			return 0;
 		}
 	}
-
-
 
 	cout << "NO" << endl;
 }
